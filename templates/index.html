@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="navbar">
+   <h1>Ivy Moisture Monitor</h1>
+</div>
+
+<div style="padding-top: 80px">
+   <div id='moistureChart'><!-- Plotly chart will be drawn inside this DIV --></div>
+</div>
+
+
+
+
+   
+<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<script src="{{ url_for('static', filename='js/plotting.js') }}"></script>
+<script>
+   var graph_data = JSON.parse('{{ data | tojson | safe }}');
+   plot_moisture_data(graph_data, "moistureChart", "ivy");
+</script>
+
+<p>Last server request: {{now}}</p>
+
+{% endblock %}
